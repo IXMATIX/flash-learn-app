@@ -8,7 +8,7 @@ import FlashcardSetList from "@/components/Layout/FlashcardSetList";
 
 export default function HomePage() {
   const [sets, setSets] = useState<FlashcardSet[]>([]);
-
+  const [deleteId, setDeleteId] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -21,8 +21,10 @@ export default function HomePage() {
       <HeaderSection />
       <FlashcardSetList
         sets={sets}
-        onEdit={() => {}}
-        onDelete={() => {}}
+        onEdit={(id) => router.push(`#${id}`)}
+        onDelete={(id) => {
+          setDeleteId(id);
+        }}
       />
     </div>
   );

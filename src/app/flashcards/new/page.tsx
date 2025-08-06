@@ -1,4 +1,5 @@
 "use client";
+import CardFormActions from "@/components/InputsFlashcard/CardFormActions";
 import FlashcardInput from "@/components/InputsFlashcard/FlashcardInput";
 import SetDescriptionInput from "@/components/InputsFlashcard/SetDescriptionInput";
 import SetNameInput from "@/components/InputsFlashcard/SetNameInput";
@@ -10,6 +11,7 @@ export default function CreateFlashcardSetPage() {
       <SetNameInput/>
       <SetDescriptionInput/>
       <FlashcardInput/>
+      <CardFormActions />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 "use client";
+import FlashcardInput from "@/components/InputsFlashcard/FlashcardInput";
 import SetDescriptionInput from "@/components/InputsFlashcard/SetDescriptionInput";
 import SetNameInput from "@/components/InputsFlashcard/SetNameInput";
 
@@ -8,6 +9,7 @@ export default function CreateFlashcardSetPage() {
       <h1 className="text-3xl font-bold mb-6 text-blue-700">📚 Create a new set of flashcards</h1>
       <SetNameInput/>
       <SetDescriptionInput/>
+      <FlashcardInput/>
     </div>
   );
 }

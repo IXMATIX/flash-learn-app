@@ -8,10 +8,28 @@ import FlashcardNavigation from "@/components/Flashcard/FlashcardNavigation";
 import ProgressBar from "@/components/Flashcard/ProgressBar";
 
 export default function FlashcardSetPage() {
+  const params = useParams();
+  const setId = params.setId;
+  const router = useRouter();
   const [setData, setSetData] = useState<FlashcardSet | null>(null);
   const [current, setCurrent] = useState(0);
 
-   if (!setData) {
+
+  useEffect(() => {
+    if (typeof setId !== "string") {
+      router.push("/");
+      return;
+    }
+    const loadData = () => {
+      const sets = JSON.parse(localStorage.getItem("flashcardSets") || "[]");
+      const found = sets.find((s: FlashcardSet) => s.id === setId);
+      if (!found) return router.push("/");
+      setSetData(found);
+    };
+    loadData();
+  }, [setId, router]);
+
+  if (!setData) {
     return (
       <div className="p-6 text-center text-gray-600">
         <p>Loading set...</p>
@@ -36,14 +54,14 @@ export default function FlashcardSetPage() {
       <Flashcard
         front={card.front}
         back={card.back}
-        showBack={}
-        onFlip={}
+        showBack={ }
+        onFlip={ }
       />
       <FlashcardNavigation
         current={current}
         total={setData.cards.length}
-        onPrev={}
-        onNext={}
+        onPrev={ }
+        onNext={ }
       />
       <ProgressBar current={current} total={setData.cards.length} />
 

@@ -71,9 +71,7 @@ export default function CreateFlashcardSetPage() {
     const existing = JSON.parse(localStorage.getItem("flashcardSets") || "[]");
     localStorage.setItem("flashcardSets", JSON.stringify([...existing, newSet]));
 
-    setTimeout(() => {
-      router.push("/");
-    }, 2200);
+    router.push("/");
   };
 
   return (

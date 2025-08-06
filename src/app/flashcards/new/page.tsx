@@ -22,7 +22,7 @@ export default function CreateFlashcardSetPage() {
   };
 
   const addCard = () => {
-    
+    setCards([...cards, { id: uuidv4(), front: "", back: "" }]);
   };
 
   const handleSubmit = () => {

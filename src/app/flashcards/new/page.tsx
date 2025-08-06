@@ -1,59 +1,50 @@
 "use client";
-import CardFormActions from "@/components/InputsFlashcard/CardFormActions";
-import FlashcardInput from "@/components/InputsFlashcard/FlashcardInput";
-import SetDescriptionInput from "@/components/InputsFlashcard/SetDescriptionInput";
-import SetNameInput from "@/components/InputsFlashcard/SetNameInput";
 import { useState } from "react";
+import { Flashcard } from "@/lib/types";
+import { v4 as uuidv4 } from "uuid";
+import { useRouter } from "next/navigation";
+import FlashcardInput from "@/components/InputsFlashcard/FlashcardInput";
+import SetNameInput from "@/components/InputsFlashcard/SetNameInput";
+import SetDescriptionInput from "@/components/InputsFlashcard/SetDescriptionInput";
+import CardFormActions from "@/components/InputsFlashcard/CardFormActions";
 
 export default function CreateFlashcardSetPage() {
-  const [setName, setSetName] = useState("");
-  const [setDescription, setSetDescription] = useState("");
-  const [flashcards, setFlashcards] = useState([
-    // Example initial flashcard; adjust as needed
-    { question: "", answer: "" }
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [cards, setCards] = useState<Flashcard[]>([
+    { id: uuidv4(), front: "", back: "" },
   ]);
 
-  // Handler for updating a flashcard at a given index
-  const handleFlashcardChange = (index, field, value) => {
-    setFlashcards(prev =>
-      prev.map((card, i) =>
-        i === index ? { ...card, [field]: value } : card
-      )
-    );
+  const router = useRouter();
+
+  const handleCardChange = (index: number, field: "front" | "back", value: string) => {
+
   };
 
-  // Handler for adding a new flashcard
-  const handleAddFlashcard = () => {
-    setFlashcards(prev => [...prev, { question: "", answer: "" }]);
+  const addCard = () => {
+    
   };
 
-  // Handler for removing a flashcard
-  const handleRemoveFlashcard = (index) => {
-    setFlashcards(prev => prev.filter((_, i) => i !== index));
+  const handleSubmit = () => {
+
   };
 
   return (
     <div className="max-w-2xl mx-auto p-6 text-gray-800">
       <h1 className="text-3xl font-bold mb-6 text-blue-700">📚 Create a new set of flashcards</h1>
-      <SetNameInput
-        value={setName}
-        onChange={e => setSetName(e.target.value)}
-      />
-      <SetDescriptionInput
-        value={setDescription}
-        onChange={e => setSetDescription(e.target.value)}
-      />
-      <FlashcardInput
-        flashcards={flashcards}
-        onFlashcardChange={handleFlashcardChange}
-        onAddFlashcard={handleAddFlashcard}
-        onRemoveFlashcard={handleRemoveFlashcard}
-      />
-      <CardFormActions
-        setName={setName}
-        setDescription={setDescription}
-        flashcards={flashcards}
-      />
+      <SetNameInput value={name} onChange={setName}/>
+      <SetDescriptionInput value={description} onChange={setDescription} />
+      <h2 className="text-xl font-semibold mb-4 text-blue-600">🧠 Cards</h2>
+      {cards.map((card, index) => (
+        <FlashcardInput
+          key={card.id}
+          index={index}
+          card={card}
+          onChange={(field, value) => handleCardChange(index, field, value)}
+          onDelete={() => (index)}
+        />
+      ))}
+      <CardFormActions onAddCard={addCard} onSaveSet={handleSubmit} />
     </div>
   );
 }

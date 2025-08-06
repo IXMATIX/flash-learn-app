@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Flashcard } from "@/lib/types";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
-
 import FlashcardInput from "@/components/InputsFlashcard/FlashcardInput";
 import SetNameInput from "@/components/InputsFlashcard/SetNameInput";
 import SetDescriptionInput from "@/components/InputsFlashcard/SetDescriptionInput";
@@ -16,11 +15,9 @@ export default function CreateFlashcardSetPage() {
   const [cards, setCards] = useState<Flashcard[]>([
     { id: uuidv4(), front: "", back: "" },
   ]);
-
   const [errors, setErrors] = useState<{ name?: string; cards: string[] }>({
     cards: [],
   });
-  
 
   const handleCardChange = (index: number, field: "front" | "back", value: string) => {
     const newCards = [...cards];
@@ -32,18 +29,45 @@ export default function CreateFlashcardSetPage() {
     setCards([...cards, { id: uuidv4(), front: "", back: "" }]);
   };
 
-   const handleDeleteCard = (index: number) => {
+  const handleDeleteCard = (index: number) => {
     setCards(cards.filter((_, i) => i !== index));
   };
 
+  const validate = () => {
+    const newErrors = { name: "", cards: [] as string[] };
+
+    if (name.trim() === "") {
+      newErrors.name = "The set name is required.";
+    }
+
+    if (cards.length === 0) {
+      return false;
+    }
+
+    cards.forEach((card, i) => {
+      if (card.front.trim() === "" || card.back.trim() === "") {
+        newErrors.cards[i] = `Complete card #${i + 1}`;
+      } else {
+        newErrors.cards[i] = "";
+      }
+    });
+
+    setErrors(newErrors);
+
+    const hasErrors = newErrors.name || newErrors.cards.some(Boolean);
+    return !hasErrors;
+  };
 
   const handleSubmit = () => {
+    if (!validate()) return;
+
     const newSet = {
       id: uuidv4(),
       name,
       description,
       cards,
     };
+
     const existing = JSON.parse(localStorage.getItem("flashcardSets") || "[]");
     localStorage.setItem("flashcardSets", JSON.stringify([...existing, newSet]));
 

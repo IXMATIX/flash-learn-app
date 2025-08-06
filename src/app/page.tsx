@@ -12,7 +12,8 @@ export default function HomePage() {
   const router = useRouter();
 
   useEffect(() => {
-
+    const stored = localStorage.getItem("flashcardSets");
+    if (stored) setSets(JSON.parse(stored));
   }, []);
 
   return (

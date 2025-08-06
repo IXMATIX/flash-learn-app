@@ -8,7 +8,7 @@ export default function FlashcardInput({}) {
       <div className="mb-2">
         <input
           type="text"
-          placeholder="Front #"
+          placeholder="Front"
     
           className="w-full p-2 border rounded"
         />

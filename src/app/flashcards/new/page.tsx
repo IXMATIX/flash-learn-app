@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Flashcard } from "@/lib/types";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
+
 import FlashcardInput from "@/components/InputsFlashcard/FlashcardInput";
 import SetNameInput from "@/components/InputsFlashcard/SetNameInput";
 import SetDescriptionInput from "@/components/InputsFlashcard/SetDescriptionInput";
@@ -27,6 +28,10 @@ export default function CreateFlashcardSetPage() {
     setCards([...cards, { id: uuidv4(), front: "", back: "" }]);
   };
 
+   const handleDeleteCard = (index: number) => {
+    setCards(cards.filter((_, i) => i !== index));
+  };
+
   const handleSubmit = () => {
     const newSet = {
       id: uuidv4(),
@@ -36,7 +41,7 @@ export default function CreateFlashcardSetPage() {
     };
     const existing = JSON.parse(localStorage.getItem("flashcardSets") || "[]");
     localStorage.setItem("flashcardSets", JSON.stringify([...existing, newSet]));
-    
+
     setTimeout(() => {
       router.push("/");
     }, 2200);
@@ -54,7 +59,7 @@ export default function CreateFlashcardSetPage() {
           index={index}
           card={card}
           onChange={(field, value) => handleCardChange(index, field, value)}
-          onDelete={() => (index)}
+          onDelete={() => handleDeleteCard(index)}
         />
       ))}
       <CardFormActions onAddCard={addCard} onSaveSet={handleSubmit} />

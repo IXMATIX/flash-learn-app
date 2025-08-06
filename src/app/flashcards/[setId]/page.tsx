@@ -13,7 +13,7 @@ export default function FlashcardSetPage() {
   const router = useRouter();
   const [setData, setSetData] = useState<FlashcardSet | null>(null);
   const [current, setCurrent] = useState(0);
-
+  const [showBack, setShowBack] = useState(false);
 
   useEffect(() => {
     if (typeof setId !== "string") {
@@ -28,6 +28,18 @@ export default function FlashcardSetPage() {
     };
     loadData();
   }, [setId, router]);
+
+  const handleNext = () => {
+    setShowBack(false);
+    setCurrent((prev) =>
+      setData && prev < setData.cards.length - 1 ? prev + 1 : prev
+    );
+  };
+
+  const handlePrev = () => {
+    setShowBack(false);
+    setCurrent((prev) => (prev > 0 ? prev - 1 : prev));
+  };
 
   if (!setData) {
     return (
@@ -54,14 +66,14 @@ export default function FlashcardSetPage() {
       <Flashcard
         front={card.front}
         back={card.back}
-        showBack={ }
-        onFlip={ }
+        showBack={showBack}
+        onFlip={() => setShowBack(!showBack)}
       />
       <FlashcardNavigation
         current={current}
         total={setData.cards.length}
-        onPrev={ }
-        onNext={ }
+        onPrev={handlePrev}
+        onNext={handleNext}
       />
       <ProgressBar current={current} total={setData.cards.length} />
 

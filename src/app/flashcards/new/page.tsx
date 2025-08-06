@@ -18,7 +18,9 @@ export default function CreateFlashcardSetPage() {
   const router = useRouter();
 
   const handleCardChange = (index: number, field: "front" | "back", value: string) => {
-
+    const newCards = [...cards];
+    newCards[index][field] = value;
+    setCards(newCards);
   };
 
   const addCard = () => {

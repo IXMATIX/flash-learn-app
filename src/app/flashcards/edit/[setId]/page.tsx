@@ -1,7 +1,9 @@
 "use client";
+
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FlashcardSet } from "@/lib/types";
+import { v4 as uuidv4 } from "uuid";
 
 import FlashcardInput from "@/components/InputsFlashcard/FlashcardInput";
 import CardFormActions from "@/components/InputsFlashcard/CardFormActions";
@@ -29,6 +31,7 @@ export default function EditFlashcardSetPage() {
     }
   }, [setId, notFound]);
 
+
   if (notFound) return <p className="p-6">Set not found</p>;
 
   if (!setData) return <p className="p-6">Loading set for editing...</p>;
@@ -43,6 +46,14 @@ export default function EditFlashcardSetPage() {
     const newCards = [...setData.cards];
     newCards[index][field] = value;
     setSetData({ ...setData, cards: newCards });
+  };
+
+  const handleAddCard = () => {
+    if (!setData) return;
+    setSetData({
+      ...setData,
+      cards: [...setData.cards, { id: uuidv4(), front: "", back: "" }],
+    });
   };
 
   const handleDeleteCard = (index: number) => {
@@ -78,6 +89,23 @@ export default function EditFlashcardSetPage() {
     return !hasErrors;
   };
 
+  const handleSubmit = () => {
+    if (!validate()) return;
+
+    const sets = JSON.parse(localStorage.getItem("flashcardSets") || "[]");
+    const updatedSets = sets.map((s: FlashcardSet) =>
+      s.id === setData!.id ? setData : s
+    );
+
+    localStorage.setItem("flashcardSets", JSON.stringify(updatedSets));
+
+    setTimeout(() => {
+      router.push("/");
+    }, 2000);
+  };
+
+  if (!setData) return <p className="p-6">Loading set for editing...</p>;
+
   return (
     <div className="max-w-2xl mx-auto p-6 text-gray-800">
       <h1 className="text-3xl font-bold mb-6 text-blue-700">✏️ Edit Flashcard Set</h1>
@@ -105,7 +133,8 @@ export default function EditFlashcardSetPage() {
           onDelete={() => handleDeleteCard(index)}
         />
       ))}
-      <CardFormActions onAddCard={ } onSaveSet={ } />
+
+      <CardFormActions onAddCard={handleAddCard} onSaveSet={handleSubmit} />
     </div>
   );
 }

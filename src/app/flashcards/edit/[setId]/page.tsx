@@ -9,6 +9,7 @@ import FlashcardInput from "@/components/InputsFlashcard/FlashcardInput";
 import CardFormActions from "@/components/InputsFlashcard/CardFormActions";
 import SetDescriptionInput from "@/components/InputsFlashcard/SetDescriptionInput";
 import SetNameInput from "@/components/InputsFlashcard/SetNameInput";
+import { toast } from "react-toastify";
 
 export default function EditFlashcardSetPage() {
   const [notFound, setNotFound] = useState(false);
@@ -71,6 +72,7 @@ export default function EditFlashcardSetPage() {
     }
 
     if (setData.cards.length === 0) {
+      toast.error("There must be at least one flashcard.");
       return false;
     }
 
@@ -96,6 +98,8 @@ export default function EditFlashcardSetPage() {
     );
 
     localStorage.setItem("flashcardSets", JSON.stringify(updatedSets));
+
+    toast.success("Flashcard set updated successfully! ✅");
 
     setTimeout(() => {
       router.push("/");

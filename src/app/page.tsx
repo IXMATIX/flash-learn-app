@@ -6,6 +6,7 @@ import { FlashcardSet } from "@/lib/types";
 import DeleteModal from "@/components/DeleteModal";
 import HeaderSection from "@/components/Layout/HeaderSection";
 import FlashcardSetList from "@/components/Layout/FlashcardSetList";
+import { toast } from "react-toastify";
 
 export default function HomePage() {
   const [sets, setSets] = useState<FlashcardSet[]>([]);
@@ -23,6 +24,7 @@ export default function HomePage() {
     const updated = sets.filter((s) => s.id !== deleteId);
     setSets(updated);
     localStorage.setItem("flashcardSets", JSON.stringify(updated));
+    toast.success("Flashcard set deleted successfully! 🗑️");
     setDeleteId(null);
   };
 

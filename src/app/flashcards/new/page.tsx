@@ -7,6 +7,7 @@ import FlashcardInput from "@/components/InputsFlashcard/FlashcardInput";
 import SetNameInput from "@/components/InputsFlashcard/SetNameInput";
 import SetDescriptionInput from "@/components/InputsFlashcard/SetDescriptionInput";
 import CardFormActions from "@/components/InputsFlashcard/CardFormActions";
+import { toast } from "react-toastify";
 
 export default function CreateFlashcardSetPage() {
   const [name, setName] = useState("");
@@ -70,6 +71,8 @@ export default function CreateFlashcardSetPage() {
 
     const existing = JSON.parse(localStorage.getItem("flashcardSets") || "[]");
     localStorage.setItem("flashcardSets", JSON.stringify([...existing, newSet]));
+
+    toast.success("Set saved successfully! 🎉");
 
     router.push("/");
   };

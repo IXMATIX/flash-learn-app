@@ -1,39 +1,59 @@
 "use client";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { FlashcardSet } from "@/lib/types";
+
 import FlashcardInput from "@/components/InputsFlashcard/FlashcardInput";
 import CardFormActions from "@/components/InputsFlashcard/CardFormActions";
 import SetDescriptionInput from "@/components/InputsFlashcard/SetDescriptionInput";
 import SetNameInput from "@/components/InputsFlashcard/SetNameInput";
 
 export default function EditFlashcardSetPage() {
+  const [notFound, setNotFound] = useState(false);
+  const { setId } = useParams();
+  const router = useRouter();
+  const [setData, setSetData] = useState<FlashcardSet | null>(null);
+
+  useEffect(() => {
+    const sets = JSON.parse(localStorage.getItem("flashcardSets") || "[]");
+    const found = sets.find((s: FlashcardSet) => s.id === setId);
+
+    if (!found && !notFound) {
+      setNotFound(true);
+      router.push("/");
+    } else {
+      setSetData(found);
+    }
+  }, [setId, notFound]);
 
   return (
     <div className="max-w-2xl mx-auto p-6 text-gray-800">
       <h1 className="text-3xl font-bold mb-6 text-blue-700">✏️ Edit Flashcard Set</h1>
 
       <SetNameInput
-        value={}
-        onChange={() =>()}
-        error={}
+        value={ }
+        onChange={() => ()}
+        error={ }
       />
 
       <SetDescriptionInput
-        value={}
+        value={ }
         onChange={() => ()}
       />
 
       <h2 className="text-xl font-semibold mb-4 text-blue-600">🧠 Cards</h2>
 
-      
-        <FlashcardInput
-          key={}
-          index={}
-          card={}
-          error={}
-          onChange={() => ()}
-          onDelete={() => ()}
-        />
 
-      <CardFormActions onAddCard={} onSaveSet={} />
+      <FlashcardInput
+        key={ }
+        index={ }
+        card={ }
+        error={ }
+        onChange={() => ()}
+        onDelete={() => ()}
+      />
+
+      <CardFormActions onAddCard={ } onSaveSet={ } />
     </div>
   );
 }

@@ -42,6 +42,7 @@ export default function CreateFlashcardSetPage() {
     }
 
     if (cards.length === 0) {
+      toast.error("At least one card is required.");
       return false;
     }
 

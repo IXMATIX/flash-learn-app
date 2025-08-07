@@ -42,6 +42,13 @@ export default function EditFlashcardSetPage() {
     setSetData({ ...setData, cards: newCards });
   };
 
+  const handleDeleteCard = (index: number) => {
+    if (!setData) return;
+    const newCards = [...setData.cards];
+    newCards.splice(index, 1);
+    setSetData({ ...setData, cards: newCards });
+  };
+
   return (
     <div className="max-w-2xl mx-auto p-6 text-gray-800">
       <h1 className="text-3xl font-bold mb-6 text-blue-700">✏️ Edit Flashcard Set</h1>
@@ -66,7 +73,7 @@ export default function EditFlashcardSetPage() {
           card={card}
           error={ }
           onChange={(field, value) => handleCardChange(index, field, value)}
-          onDelete={() => ()}
+          onDelete={() => handleDeleteCard(index)}
         />
       ))}
       <CardFormActions onAddCard={ } onSaveSet={ } />

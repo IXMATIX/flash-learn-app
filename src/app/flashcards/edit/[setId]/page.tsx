@@ -13,6 +13,9 @@ export default function EditFlashcardSetPage() {
   const { setId } = useParams();
   const router = useRouter();
   const [setData, setSetData] = useState<FlashcardSet | null>(null);
+  const [errors, setErrors] = useState<{ name?: string; cards: string[] }>({
+    cards: [],
+  });
 
   useEffect(() => {
     const sets = JSON.parse(localStorage.getItem("flashcardSets") || "[]");
@@ -49,6 +52,32 @@ export default function EditFlashcardSetPage() {
     setSetData({ ...setData, cards: newCards });
   };
 
+  const validate = () => {
+    if (!setData) return false;
+
+    const newErrors = { name: "", cards: [] as string[] };
+
+    if (setData.name.trim() === "") {
+      newErrors.name = "The set name is required.";
+    }
+
+    if (setData.cards.length === 0) {
+      return false;
+    }
+
+    setData.cards.forEach((card, i) => {
+      if (card.front.trim() === "" || card.back.trim() === "") {
+        newErrors.cards[i] = `Complete card #${i + 1}`;
+      } else {
+        newErrors.cards[i] = "";
+      }
+    });
+
+    setErrors(newErrors);
+    const hasErrors = newErrors.name || newErrors.cards.some(Boolean);
+    return !hasErrors;
+  };
+
   return (
     <div className="max-w-2xl mx-auto p-6 text-gray-800">
       <h1 className="text-3xl font-bold mb-6 text-blue-700">✏️ Edit Flashcard Set</h1>
@@ -56,7 +85,7 @@ export default function EditFlashcardSetPage() {
       <SetNameInput
         value={setData.name}
         onChange={(value: string) => handleChange("name", value)}
-        error={}
+        error={errors.name}
       />
 
       <SetDescriptionInput
@@ -71,7 +100,7 @@ export default function EditFlashcardSetPage() {
           key={card.id}
           index={index}
           card={card}
-          error={ }
+          error={errors.cards[index]}
           onChange={(field, value) => handleCardChange(index, field, value)}
           onDelete={() => handleDeleteCard(index)}
         />

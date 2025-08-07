@@ -23,18 +23,16 @@ export default function EditFlashcardSetPage() {
     const sets = JSON.parse(localStorage.getItem("flashcardSets") || "[]");
     const found = sets.find((s: FlashcardSet) => s.id === setId);
 
-    if (!found && !notFound) {
-      setNotFound(true);
+    if (!found) {
       router.push("/");
     } else {
       setSetData(found);
     }
-  }, [setId, notFound]);
+  }, [setId]);
 
 
-  if (notFound) return <p className="p-6">Set not found</p>;
-
-  if (!setData) return <p className="p-6">Loading set for editing...</p>;
+  // If setData is null after redirect, show "Set not found"
+  if (!setData) return <p className="p-6">Set not found</p>;
 
   const handleChange = (field: string, value: string) => {
     if (!setData) return;

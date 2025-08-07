@@ -24,7 +24,7 @@ export default function HomePage() {
     const updated = sets.filter((s) => s.id !== deleteId);
     setSets(updated);
     localStorage.setItem("flashcardSets", JSON.stringify(updated));
-    toast.success("Flashcard set deleted successfully!");
+    toast.success("Flashcard set deleted successfully! 🗑️");
     setDeleteId(null);
   };
 

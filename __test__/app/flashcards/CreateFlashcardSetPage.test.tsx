@@ -61,11 +61,11 @@ describe("CreateFlashcardSetPage validation tests", () => {
       target: { value: "My Set" },
     });
 
-    fireEvent.change(screen.getByPlaceholderText(/Frente #1/i), {
+    fireEvent.change(screen.getByPlaceholderText(/Front #/i), {
       target: { value: "Front content" },
     });
 
-    fireEvent.change(screen.getByPlaceholderText(/Back #1/i), {
+    fireEvent.change(screen.getByPlaceholderText(/Back #/i), {
       target: { value: "Back content" },
     });
     fireEvent.click(screen.getByText(/Save Set/i));

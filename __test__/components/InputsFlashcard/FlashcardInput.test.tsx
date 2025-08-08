@@ -16,8 +16,8 @@ describe("FlashcardInput", () => {
       />
     );
 
-    expect(screen.getByPlaceholderText(/frente #1/i)).toHaveValue("front text");
-    expect(screen.getByPlaceholderText(/back #1/i)).toHaveValue("back text");
+    expect(screen.getByPlaceholderText(/front #/i)).toHaveValue("front text");
+    expect(screen.getByPlaceholderText(/back #/i)).toHaveValue("back text");
   });
 
   it("calls onChange with 'front' when front input changes", () => {
@@ -32,7 +32,7 @@ describe("FlashcardInput", () => {
       />
     );
 
-    fireEvent.change(screen.getByPlaceholderText(/frente #1/i), {
+    fireEvent.change(screen.getByPlaceholderText(/front #/i), {
       target: { value: "new front" },
     });
 
@@ -51,7 +51,7 @@ describe("FlashcardInput", () => {
       />
     );
 
-    fireEvent.change(screen.getByPlaceholderText(/back #1/i), {
+    fireEvent.change(screen.getByPlaceholderText(/back #/i), {
       target: { value: "new back" },
     });
 

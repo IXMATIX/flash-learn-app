@@ -14,7 +14,8 @@ Perfect for learning languages, science, history, or any topic through active re
 - ⚙ **GitHub Actions CI** – automated testing for multiple operating systems.
 
 ## 🎥 Demo Video
-[![▶ Watch the video demo](https://markdown-videos.deta.dev/youtube/NarBox1LkYc)](https://youtu.be/AWt6Hsyb5Gk)
+[![▶ Watch the video demo](https://img.youtube.com/vi/AWt6Hsyb5Gk/0.jpg)](https://www.youtube.com/watch?v=AWt6Hsyb5Gk)
+
 
 The video shows:
 

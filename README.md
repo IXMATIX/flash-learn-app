@@ -1,16 +1,28 @@
-
 # 🧠 Flashcards App
 
-A flashcard learning application built with **Next.js**, **TypeScript**, and **Tailwind CSS**. Users can create, edit, delete, and view custom flashcard sets. All data is stored locally using `localStorage`.
+A web application built with **Next.js**, **TypeScript**, and **Tailwind CSS** that allows users to create, manage, and study custom flashcard sets.\
+Perfect for learning languages, science, history, or any topic through active recall.
 
 ## ✨ Features
 
-- Create custom flashcard sets
-- Edit and delete existing sets
-- Add multiple flashcards with front/back content
-- Basic validation and notifications with `react-toastify`
-- Responsive and modern user interface
-- Fully local storage (no backend for now)
+- 📝 **Create & edit flashcard sets** with titles, descriptions, and multiple cards.
+- 🔍 **View sets** with an interactive "flip" feature for studying.
+- 💾 **LocalStorage persistence** – your sets are saved in the browser.
+- 🗑 **Delete sets** easily.
+- 📱 **Fully responsive** – works on mobile, tablet, and desktop.
+- 🧪 **Test coverage** with Jest & React Testing Library.
+- ⚙ **GitHub Actions CI** – automated testing for multiple operating systems.
+
+## 🎥 Demo Video
+
+[▶ Watch the video demo](https://youtu.be/AWt6Hsyb5Gk)
+
+The video shows:
+
+1. Creating a new flashcard set.
+2. Editing existing cards.
+3. Viewing and flipping cards.
+4. Deleting sets.
 
 ## 🧱 Folder Structure
 
@@ -41,30 +53,28 @@ A flashcard learning application built with **Next.js**, **TypeScript**, and **T
 📄 package.json
 ```
 
-## 🛠️ Tech Stack
-
-- [Next.js 15](https://nextjs.org/)
-- [React 18](https://reactjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [React Toastify](https://fkhadra.github.io/react-toastify/)
-- [uuid](https://www.npmjs.com/package/uuid)
-
 ## 🚀 Getting Started
 
+### 1️⃣ Clone the repository
+
 ```bash
-# Clone the repo
-git clone https://github.com/your-username/flashcards-app.git
+git clone https://github.com/YOUR_USERNAME/flashcards-app.git
 cd flashcards-app
+```
 
-# Install dependencies
+### 2️⃣ Install dependencies
+
+```bash
 npm install
+```
 
-# Run in development mode
+### 3️⃣ Run the development server
+
+```bash
 npm run dev
 ```
 
-The app will be available at `http://localhost:3000`.
+Then visit [**http://localhost:3000**](http://localhost:3000) in your browser.
 
 ## 🧪 Testing
 
@@ -84,11 +94,21 @@ npm run build
 npm start
 ```
 
-## 📌 Notes
+> [!NOTE]
+> ## 📌 Notes
+>
+> - Currently uses `localStorage`, so data is only saved locally per browser.
+> - Easily extendable to support a backend in the future (e.g., Supabase, Firebase).
 
-- Currently uses `localStorage`, so data is only saved locally per browser.
-- Easily extendable to support a backend in the future (e.g., Supabase, Firebase).
+## 🔄 GitHub Actions
 
+This project uses **GitHub Actions** to run tests on **Ubuntu**, **Windows**, and **macOS** automatically when you push code or open a pull request.
+
+The workflow file is located at:
+
+```
+.github/workflows/ci.yml
+```
 ## 💡 Future Improvements
 
 - Search functionality for sets
@@ -101,5 +121,18 @@ npm start
 Built by [Brunonxale].
 
 ---
+## 🛠 Technologies Used
 
-Feel free to contribute or suggest new features!
+- **Next.js 15** (App Router)
+- **TypeScript**
+- **Tailwind CSS**
+- **React Hook Form**
+- **React Testing Library**
+- **Jest**
+- **React Toastify**
+- **UUID**
+
+## 📜 License
+
+This project is licensed under the MIT License.
+

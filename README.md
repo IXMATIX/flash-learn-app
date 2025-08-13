@@ -83,11 +83,12 @@ npm run test:watch  # Run tests in watch mode
 npm run build
 npm start
 ```
+> [!NOTE]
+> ## 📌 Notes
+>
+> - Currently uses `localStorage`, so data is only saved locally per browser.
+> - Easily extendable to support a backend in the future (e.g., Supabase, Firebase).
 
-## 📌 Notes
-
-- Currently uses `localStorage`, so data is only saved locally per browser.
-- Easily extendable to support a backend in the future (e.g., Supabase, Firebase).
 
 ## 💡 Future Improvements
 
